@@ -1,20 +1,22 @@
 
 import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Logo from '../images/logo.png';
 import BtnArrow from '../images/right-arrow.svg';
+import DownArrow from '../images/down-arrow.svg';
 
 const Header = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 0) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -27,26 +29,33 @@ const Header = () => {
     };
   }, []);
 
- const smoothScroll = (e, targetId) => {
-    e.preventDefault();
-    const targetElement = document.getElementById(targetId.replace('#', ''));
-    
-    if (targetElement) {
-      const headerHeight = document.querySelector('header')?.offsetHeight || 80;
-      const targetPosition = targetElement.offsetTop - headerHeight;
+const smoothScroll = (e, targetId) => {
+  e.preventDefault();
 
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
+  const id = targetId.replace('/#', '').replace('#', '');
+  const currentPath = pathname;
 
-      // For browsers that don't support smooth scroll
-      if (!('scrollBehavior' in document.documentElement.style)) {
-        smoothScrollFallback(targetPosition);
-      }
+  if (currentPath !== '/' && targetId.startsWith('/#')) {
+    // Navigate to home first, then scroll
+    navigate(`/#${id}`, { replace: false });
+    return;
+  }
+
+  const targetElement = document.getElementById(id);
+  if (targetElement) {
+    const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+    const targetPosition = targetElement.offsetTop - headerHeight;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth',
+    });
+
+    if (!('scrollBehavior' in document.documentElement.style)) {
+      smoothScrollFallback(targetPosition);
     }
-  };
+  }
+};
 
   // Fallback for older browsers
   const smoothScrollFallback = (targetPosition) => {
@@ -86,22 +95,28 @@ const Header = () => {
           <nav className={`header__nav ${isOpen ? 'active' : ''}`}>
             <ul className="header__menu">
               <li className="header__menu-item">
-                <a href="#hero" className='header__menu-link' onClick={(e) => smoothScroll(e, '#hero')}>Home</a>
+                <Link to="/#hero" className='header__menu-link' onClick={(e) => smoothScroll(e, '/#hero')}>Home</Link>
               </li>
               <li className="header__menu-item">
-                <a href="#service" className='header__menu-link' onClick={(e) => smoothScroll(e, '#service')}>Services</a>
+                <Link to="/#offering" className='header__menu-link' onClick={(e) => smoothScroll(e, '/#offering')}>Offering</Link>
+              </li>
+              <li className="header__menu-item has_children">
+                <Link to="/industry" className='header__menu-link'>Industry <img src={DownArrow} className='ml5' alt="" /></Link>
+                <ul className='sub_menu'>
+                  <li><Link to="/industry#restaurants">Restaurants</Link></li>
+                  <li><Link to="/industry#HomeGarden">Home & Garden</Link></li>
+                  <li><Link to="/industry#DentalClinic">Dental Clinics</Link></li>
+                  <li><Link to="/industry#PoliticalCampaigns">Political Campaigns</Link></li>
+                  <li><Link to="/industry#OpticalClinics">Optical Clinics</Link></li>
+                  <li><Link to="/industry#RealEstate">Real Estate</Link></li>
+                  <li><Link to="/industry#HealthWellness">Health & Wellness</Link></li>
+                </ul>
               </li>
               <li className="header__menu-item">
-                <a href="#about" className='header__menu-link' onClick={(e) => smoothScroll(e, '#about')}>Industry</a>
-              </li>
-              <li className="header__menu-item">
-                <a href="#industry" className='header__menu-link' onClick={(e) => smoothScroll(e, '#industry')}>Blog</a>
-              </li>
-              <li className="header__menu-item">
-                <a href="#testimonial" className='header__menu-link' onClick={(e) => smoothScroll(e, '#testimonial')}>Contact</a>
+                <Link to="#contact" className='header__menu-link' onClick={(e) => smoothScroll(e, '#contact')}>Contact</Link>
               </li>
             </ul>
-            <a href="#contact" className="btn btn__dark" onClick={(e) => smoothScroll(e, '#contact')}>Free Consult <span><img src={BtnArrow} alt="" /></span></a>
+            <Link to="#contact" className="btn btn__dark" onClick={(e) => smoothScroll(e, '#contact')}>Free Consult <span><img src={BtnArrow} alt="" /></span></Link>
           </nav>
 
           <div className="header__toggle" onClick={() => setIsOpen(!isOpen)}>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Container from "react-bootstrap/Container";
@@ -6,29 +6,67 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import bannerImg from "../images/banner-img.jpg";
 import btnAarrow from "../images/right-arrow.svg";
-import CostEffective from "../images/cost-effective.svg";
-import HyperTargeted from "../images/hyper-targeted.svg";
-import Design from "../images/design.svg";
 import VproLogo from "../images/vpro-logo.svg";
 import DwebLogo from "../images/d-web-logo.svg";
 import RagionalMap from "../images/rgional-map.jpg";
+import GoogleIcon from "../images/google.svg";
+import Star from "../images/star.svg";
+import SharedFlyerMail from "../images/shared-flyer-mail.jpg";
+import SolorMail from "../images/solo-mail.jpg";
+import TakeOutMenu from "../images/takeout-menu.jpg";
+import SharedFlyer1 from "../images/shared-flyer1.svg";
+import SharedFlyer2 from "../images/shared-flyer2.svg";
+import SharedFlyer3 from "../images/shared-flyer3.svg";
+import soloMail1 from "../images/soloMail1.svg";
+import soloMail2 from "../images/soloMail2.svg";
+import soloMail3 from "../images/soloMail3.svg";
+import Icon1 from "../images/design.svg";
+import Icon2 from "../images/print.svg";
+import Icon3 from "../images/deliver.svg";
+import Icon4 from "../images/track.svg";
+import Logo1 from "../images/logo1.webp";
+import Logo2 from "../images/logo2.webp";
+import Logo3 from "../images/logo3.webp";
+import Logo4 from "../images/logo4.webp";
+import Logo5 from "../images/logo5.webp";
+import Logo6 from "../images/logo6.svg";
+import Logo7 from "../images/logo7.webp";
+import Logo8 from "../images/logo8.webp";
+import Logo9 from "../images/logo9.webp";
+import Logo10 from "../images/logo10.webp";
+import Logo11 from "../images/logo11.webp";
+import Logo12 from "../images/logo12.webp";
+import Logo13 from "../images/logo13.webp";
+import Logo14 from "../images/logo14.webp";
+import Logo15 from "../images/logo15.webp";
+import Logo16 from "../images/logo16.webp";
+import Logo17 from "../images/logo17.webp";
+import Logo18 from "../images/logo18.webp";
+import Logo19 from "../images/logo19.webp";
+import Logo20 from "../images/logo20.webp";
+import Logo21 from "../images/logo21.webp";
+import Logo22 from "../images/logo22.webp";
+import Logo23 from "../images/logo23.webp";
+import Logo24 from "../images/logo24.webp";
+import Logo25 from "../images/logo25.webp";
+import Logo26 from "../images/logo26.webp";
+import Logo27 from "../images/logo27.webp";
+import Logo28 from "../images/logo28.webp";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useGSAP } from "@gsap/react";
-import { Link, useLocation } from "react-router-dom";
-import emailjs from "@emailjs/browser";
+import { Link } from "react-router-dom";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, useGSAP);
 
-
 const Index = () => {
-  const location = useLocation();
-const [submitted, setSubmitted] = useState(false);
 
   useGSAP(() => {
     ScrollSmoother.create({
@@ -37,32 +75,6 @@ const [submitted, setSubmitted] = useState(false);
     });
   }, [location]);
 
-  const form = useRef();
-
-const sendEmail = (e) => {
-  e.preventDefault();
-
-  if (!form.current) return;
-
-  emailjs
-    .sendForm(
-      "service_vbf5jhh",
-      "template_erkdjhk",
-      form.current,
-      "W5d0z3rvJr88fDaJ0"
-    )
-    .then(
-      (result) => {
-        setSubmitted(true);
-        form.current.reset();
-        setTimeout(() => setSubmitted(false), 5000); 
-      },
-      (error) => {
-        console.error(error.text);
-        alert("Failed to send message, please try again later.");
-      }
-    );
-};
   
 
   return (
@@ -71,7 +83,7 @@ const sendEmail = (e) => {
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <main>
-            <section className="banner_wrapper">
+            <section className="banner_wrapper" id="hero">
               <Container>
                 <Row className="align-items-center">
                   <Col lg="6">
@@ -80,7 +92,11 @@ const sendEmail = (e) => {
                         <span>Flyer Advertising</span> That Works in the
                         Maritimes
                       </h1>
-                      <p>Target homes across NS, NB, and PEI with DRMG</p>
+                      <p>
+                        Target homes across Nova Scotia, New Brunswick,
+                        Newfoundland and Labrador and Prince Edward Island with
+                        DRMG
+                      </p>
                       <div className="btn_group mt50 mt30-xl">
                         <Link to="/" className="btn btn__outline">
                           Book a Free Strategy Call{" "}
@@ -103,37 +119,345 @@ const sendEmail = (e) => {
               </Container>
             </section>
 
-            <section className="section service_wrapper">
+            <section className="section review_wrapper">
               <Container>
                 <h2 className="section__title text-center">
-                  Our <span>Services</span>
+                  We help <span>businesses grow</span>, <br />
+                  Neighborhoods thrive and consumers save.
                 </h2>
-                <Row className="g-4">
-                  <Col md="4">
-                    <div className="service_box">
-                      <div className="icon">
-                        <img src={CostEffective} alt="" />
+                <div className="review_slider_wrapper">
+                  <Swiper
+                    slidesPerView={4}
+                    spaceBetween={20}
+                    loop={true}
+                    autoplay={{
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    }}
+                    modules={[Navigation, Autoplay]}
+                    className="reviewSlider"
+                  >
+                    <SwiperSlide>
+                      <div className="review_box_wrapper">
+                        <div className="review_head d-flex align-items-center flex-wrap">
+                          <div className="user_info d-flex align-items-center">
+                            <div className="user_img">
+                              <span>A</span>
+                            </div>
+                            <div className="user_text">
+                              <h6>Alexandre Soulodre</h6>
+                              <p>1 year ago</p>
+                            </div>
+                          </div>
+                          <div className="company_img">
+                            <img src={GoogleIcon} alt="" />
+                          </div>
+                        </div>
+                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <div className="rating-star">
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                        </div>
                       </div>
-                      <h4>Cost-effective</h4>
-                    </div>
-                  </Col>
-                  <Col md="4">
-                    <div className="service_box">
-                      <div className="icon">
-                        <img src={HyperTargeted} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="review_box_wrapper">
+                        <div className="review_head d-flex align-items-center flex-wrap">
+                          <div className="user_info d-flex align-items-center">
+                            <div className="user_img">
+                              <span>A</span>
+                            </div>
+                            <div className="user_text">
+                              <h6>Alexandre Soulodre</h6>
+                              <p>1 year ago</p>
+                            </div>
+                          </div>
+                          <div className="company_img">
+                            <img src={GoogleIcon} alt="" />
+                          </div>
+                        </div>
+                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <div className="rating-star">
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                        </div>
                       </div>
-                      <h4>Hyper-targeted</h4>
-                    </div>
-                  </Col>
-                  <Col md="4">
-                    <div className="service_box">
-                      <div className="icon">
-                        <img src={Design} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="review_box_wrapper">
+                        <div className="review_head d-flex align-items-center flex-wrap">
+                          <div className="user_info d-flex align-items-center">
+                            <div className="user_img">
+                              <span>A</span>
+                            </div>
+                            <div className="user_text">
+                              <h6>Alexandre Soulodre</h6>
+                              <p>1 year ago</p>
+                            </div>
+                          </div>
+                          <div className="company_img">
+                            <img src={GoogleIcon} alt="" />
+                          </div>
+                        </div>
+                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <div className="rating-star">
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                        </div>
                       </div>
-                      <h4>We design too</h4>
-                    </div>
-                  </Col>
-                </Row>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="review_box_wrapper">
+                        <div className="review_head d-flex align-items-center flex-wrap">
+                          <div className="user_info d-flex align-items-center">
+                            <div className="user_img">
+                              <span>A</span>
+                            </div>
+                            <div className="user_text">
+                              <h6>Alexandre Soulodre</h6>
+                              <p>1 year ago</p>
+                            </div>
+                          </div>
+                          <div className="company_img">
+                            <img src={GoogleIcon} alt="" />
+                          </div>
+                        </div>
+                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <div className="rating-star">
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="review_box_wrapper">
+                        <div className="review_head d-flex align-items-center flex-wrap">
+                          <div className="user_info d-flex align-items-center">
+                            <div className="user_img">
+                              <span>A</span>
+                            </div>
+                            <div className="user_text">
+                              <h6>Alexandre Soulodre</h6>
+                              <p>1 year ago</p>
+                            </div>
+                          </div>
+                          <div className="company_img">
+                            <img src={GoogleIcon} alt="" />
+                          </div>
+                        </div>
+                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <div className="rating-star">
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                          <img src={Star} alt="" />
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
+              </Container>
+            </section>
+
+            <section className="section offering_wrapper bg_gray" id="offering">
+              <Container>
+                <div className="offering_title">
+                  <h2 className="section__title text-center">
+                    Our <span>Offerings</span>
+                  </h2>
+                  <h4>Cost Effective Print and Distribution</h4>
+                  <p>Other inclusive services: Design, Tracking Options, PT Report, Boxing, Bundling, Shipping and much more.</p>
+                </div>
+                <div className="offering_slider_wrapper">
+                   <Swiper
+                    slidesPerView={1}
+                    spaceBetween={20}
+                    navigation={true}
+                    modules={[Navigation]}
+                    className="offering_slider"
+                  >
+                    <SwiperSlide>
+                      <Row className="align-items-center">
+                        <Col md="5">
+                          <div className="offering_img">
+                            <img src={SharedFlyerMail} alt="" />
+                          </div>
+                        </Col>
+                        <Col md="7">
+                          <div className="offering_content_wrapper">
+                            <h2>Shared Flyer Mail</h2>
+                            <p>Canada’s most trusted and recognized shared direct mail envelope for monthly coupon advertising, menus, catalogues and more!</p>
+                            <div className="offering_second_wrapper">
+                              <h2 className="h3 section__title">Why <span>Shared Flyer Mail?</span></h2>
+                              <Row>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={SharedFlyer1} alt="" />
+                                    <h4>Share Costs Through Co-Op Mail</h4>
+                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={SharedFlyer2} alt="" />
+                                    <h4>One Size Does Not Fit All</h4>
+                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={SharedFlyer3} alt="" />
+                                    <h4>Increase Response Through Multichannel Campaigns</h4>
+                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Row className="align-items-center">
+                        <Col md="5">
+                          <div className="offering_img">
+                            <img src={SolorMail} alt="" />
+                          </div>
+                        </Col>
+                        <Col md="7">
+                          <div className="offering_content_wrapper">
+                            <h2>Stand out in the mailbox with DRMG Solo Direct Mail</h2>
+                            <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
+                            <div className="offering_second_wrapper">
+                              <h2 className="h3 section__title">Why <span>Solo Direct Mail?</span></h2>
+                              <Row>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail1} alt="" />
+                                    <h4>Target Your Ideal Customer</h4>
+                                    <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail2} alt="" />
+                                    <h4>Multichannel Campaign Advantage</h4>
+                                    <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail3} alt="" />
+                                    <h4>One Size Does Not Fit All</h4>
+                                    <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <Row className="align-items-center">
+                        <Col md="5">
+                          <div className="offering_img">
+                            <img src={TakeOutMenu} alt="" />
+                          </div>
+                        </Col>
+                        <Col md="7">
+                          <div className="offering_content_wrapper">
+                            <h2>Take-out Menus</h2>
+                            <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
+                            <div className="offering_second_wrapper">
+                              <h2 className="h3 section__title">Why <span>Take-out Menus?</span></h2>
+                              <Row>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail1} alt="" />
+                                    <h4>Target Your Ideal Customer</h4>
+                                    <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail2} alt="" />
+                                    <h4>Multichannel Campaign Advantage</h4>
+                                    <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
+                                  </div>
+                                </Col>
+                                <Col md="4">
+                                  <div className="offering_box">
+                                    <img src={soloMail3} alt="" />
+                                    <h4>One Size Does Not Fit All</h4>
+                                    <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
+                <div className="offering_bottom_wrapper mt40">
+                  <Row>
+                    <Col md="3">
+                      <div className="work_box_wrapper">
+                        <div className="icon">
+                          <img src={Icon1} alt="" />
+                        </div>
+                        <div className="content_in">
+                          <h4>We Design</h4>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md="3">
+                      <div className="work_box_wrapper">
+                        <div className="icon">
+                          <img src={Icon2} alt="" />
+                        </div>
+                        <div className="content_in">
+                          <h4>We Print</h4>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md="3">
+                      <div className="work_box_wrapper">
+                        <div className="icon">
+                          <img src={Icon3} alt="" />
+                        </div>
+                        <div className="content_in">
+                          <h4>We Deliver</h4>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md="3">
+                      <div className="work_box_wrapper">
+                        <div className="icon">
+                          <img src={Icon4} alt="" />
+                        </div>
+                        <div className="content_in">
+                          <h4>We Track</h4>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
               </Container>
             </section>
 
@@ -195,39 +519,153 @@ const sendEmail = (e) => {
               </Container>
             </section>
 
-            <section className="section testimonial_wrapper"
-              id="testimonial"
-            >
+            <section className="section client_logo_wrapper bg_gray">
               <Container>
-                <div className="title">
+                <div className="offering_title">
                   <h2 className="section__title text-center">
-                    Our <span>Testimonials</span>
+                    When it comes to <span>Direct Mail</span>, there's no comparison. 
                   </h2>
+                  <h4>See why over 15,000 businesses trust DRMG.</h4>
                 </div>
-                <Row className="justify-content-center">
-                  <Col lg="6">
-                    <div className="testimonial_slider_wrapper">
-                      <Swiper
-                        navigation={true}
-                        modules={[Navigation]}
-                        loop={true}
-                        className="testimonial_slider"
-                      >
-                        <SwiperSlide>
-                          <div className="testimonial_slide">
-                            <p>"We saw 3x ROI from DRMG flyers!"</p>
-                            <h6>— Halifax Plumber</h6>
-                          </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                          <div className="testimonial_slide">
-                            <p>
-                              "Their team handled everything start to finish."
-                            </p>
-                            <h6>— Sarah L., E-commerce Owner</h6>
-                          </div>
-                        </SwiperSlide>
-                      </Swiper>
+                <Row className="g-4">
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo1} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo2} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo3} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo4} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo5} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo6} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo7} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo8} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo9} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo10} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo11} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo12} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo13} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo14} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo15} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo16} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo17} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo18} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo19} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo20} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo21} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo22} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo23} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo24} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo25} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo26} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo27} alt="" />
+                    </div>
+                  </Col>
+                  <Col lg="2">
+                    <div className="logo_box">
+                      <img src={Logo28} alt="" />
                     </div>
                   </Col>
                 </Row>
@@ -249,49 +687,7 @@ const sendEmail = (e) => {
               </Container>
             </section>
 
-            <section className="section contact_wrapper">
-              <Container>
-                <Row>
-                  <Col md="4">
-                    <h2 className="section__title">
-                      {" "}
-                      <span>Let's talk</span> about your flyer goals.
-                    </h2>
-                  </Col>
-                  <Col md="8">
-                    <div className="contact_form_wrapper">
-                      <form
-                        ref={form}
-                        onSubmit={sendEmail}
-                      >
-                        <Row>
-                          <Col md="6">
-                            <input type="text" name="name" className="form-control mb20" placeholder="Enter your name" required />
-                          </Col>
-                          <Col md="6">
-                            <input type="email" name="email" className="form-control mb20" placeholder="Enter your email" required />
-                          </Col>
-                          <Col md="12">
-                            <input type="tel" name="phone" className="form-control mb20" placeholder="Enter your phone number" required />
-                          </Col>
-                          <Col md="12">
-                            <textarea name="message" className="form-control mb20" placeholder="Enter your message" required />
-                          </Col>
-                        </Row>
-                        <div className="text-end">
-                          <button className="btn btn__outline" type="submit">Request Callback <span><img src={btnAarrow} alt="" /></span></button>
-                        </div>
-                        {submitted && (
-                          <div className="submit_message">
-                            <p>Message sent successfully!</p>
-                          </div>
-                        )}
-                      </form>
-                    </div>
-                  </Col>
-                </Row>
-              </Container>
-            </section>
+            
           </main>
           <Footer />
         </div>
