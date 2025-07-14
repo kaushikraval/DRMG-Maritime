@@ -13,6 +13,11 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownClick, setDropdownClick] = useState(false);
+  
+  const handleClick = () => {
+    setDropdownClick(!dropdownClick);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,11 +41,21 @@ const smoothScroll = (e, targetId) => {
   const currentPath = pathname;
 
   if (currentPath !== '/' && targetId.startsWith('/#')) {
-    // Navigate to home first, then scroll
-    navigate(`/#${id}`, { replace: false });
+    // Pass the target id via navigation state
+    navigate('/', { state: { scrollTo: id } });
     return;
   }
 
+  scrollToSection(id);
+  setIsOpen(false);
+};
+
+const handleSubMenuClick = (id) => {
+  handleScrollNav(id);    
+  setDropdownClick(false);          
+};
+
+const scrollToSection = (id) => {
   const targetElement = document.getElementById(id);
   if (targetElement) {
     const headerHeight = document.querySelector('header')?.offsetHeight || 80;
@@ -82,12 +97,16 @@ const smoothScroll = (e, targetId) => {
     requestAnimationFrame(animation);
   };
 
+  const handleScrollNav = (sectionId) => {
+    navigate('/industry', { state: { scrollTo: sectionId } });
+  };
+
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <Container className="header__container">
         <div className="header__inner">
           <div className="header__logo">
-            <a href="#hero"> 
+            <a href="/#hero"  onClick={(e) => smoothScroll(e, '/#hero')}> 
               <img src={Logo} alt="" />
             </a>
           </div>
@@ -101,15 +120,15 @@ const smoothScroll = (e, targetId) => {
                 <Link to="/#offering" className='header__menu-link' onClick={(e) => smoothScroll(e, '/#offering')}>Offering</Link>
               </li>
               <li className="header__menu-item has_children">
-                <Link to="/industry" className='header__menu-link'>Industry <img src={DownArrow} className='ml5' alt="" /></Link>
-                <ul className='sub_menu'>
-                  <li><Link to="/industry#restaurants">Restaurants</Link></li>
-                  <li><Link to="/industry#HomeGarden">Home & Garden</Link></li>
-                  <li><Link to="/industry#DentalClinic">Dental Clinics</Link></li>
-                  <li><Link to="/industry#PoliticalCampaigns">Political Campaigns</Link></li>
-                  <li><Link to="/industry#OpticalClinics">Optical Clinics</Link></li>
-                  <li><Link to="/industry#RealEstate">Real Estate</Link></li>
-                  <li><Link to="/industry#HealthWellness">Health & Wellness</Link></li>
+                <Link to="#" className={dropdownClick  ? 'header__menu-link active' : 'header__menu-link'} onClick={() => handleClick()}>Industry <img src={DownArrow} className='ml5' alt="" /></Link>
+                <ul className={dropdownClick  ? 'sub_menu show' : 'sub_menu'}>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('restaurants');setIsOpen(false); }}>Restaurants</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('HomeGarden');setIsOpen(false); }}>Home & Garden</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('DentalClinic');setIsOpen(false); }}>Dental Clinics</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('PoliticalCampaigns');setIsOpen(false); }}>Political Campaigns</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('OpticalClinics');setIsOpen(false); }}>Optical Clinics</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('RealEstate');setIsOpen(false); }}>Real Estate</Link></li>
+                  <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('HealthWellness');setIsOpen(false); }}>Health & Wellness</Link></li>
                 </ul>
               </li>
               <li className="header__menu-item">

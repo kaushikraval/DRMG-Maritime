@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Container from "react-bootstrap/Container";
@@ -58,7 +58,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useGSAP } from "@gsap/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -67,6 +67,23 @@ import { Autoplay, Navigation } from "swiper/modules";
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, useGSAP);
 
 const Index = () => {
+
+   const location = useLocation();
+
+   useEffect(() => {
+    if (location.state?.scrollTo) {
+      const id = location.state.scrollTo;
+      const el = document.getElementById(id);
+      if (el) {
+        const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+        const top = el.offsetTop - headerHeight;
+
+        setTimeout(() => {
+          window.scrollTo({ top, behavior: 'smooth' });
+        }, 100); // wait for layout
+      }
+    }
+  }, [location]);
 
   useGSAP(() => {
     ScrollSmoother.create({
@@ -87,7 +104,7 @@ const Index = () => {
               <Container>
                 <Row className="align-items-center">
                   <Col lg="6">
-                    <div className="banner_text pr50 pr0-xl pt100">
+                    <div className="banner_text pr50 pr0-xl pt100 pt150-md">
                       <h1 className="mb50 mb30-xl">
                         <span>Flyer Advertising</span> That Works in the
                         Maritimes
@@ -133,6 +150,21 @@ const Index = () => {
                     autoplay={{
                       delay: 2500,
                       disableOnInteraction: false,
+                    }}
+
+                    breakpoints={{
+                      0: {
+                        slidesPerView: 1,
+                      },
+                      640: {
+                        slidesPerView: 2,
+                      },
+                      991: {
+                        slidesPerView: 3,
+                      },
+                      1367: {
+                        slidesPerView: 4,
+                      },
                     }}
                     modules={[Navigation, Autoplay]}
                     className="reviewSlider"
@@ -288,40 +320,47 @@ const Index = () => {
                     navigation={true}
                     modules={[Navigation]}
                     className="offering_slider"
+                    autoHeight={true}
                   >
                     <SwiperSlide>
-                      <Row className="align-items-center">
-                        <Col md="5">
+                      <Row className="align-items-center g-4">
+                        <Col lg="5">
                           <div className="offering_img">
                             <img src={SharedFlyerMail} alt="" />
                           </div>
                         </Col>
-                        <Col md="7">
+                        <Col lg="7">
                           <div className="offering_content_wrapper">
                             <h2>Shared Flyer Mail</h2>
                             <p>Canada’s most trusted and recognized shared direct mail envelope for monthly coupon advertising, menus, catalogues and more!</p>
                             <div className="offering_second_wrapper">
                               <h2 className="h3 section__title">Why <span>Shared Flyer Mail?</span></h2>
-                              <Row>
+                              <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={SharedFlyer1} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Share Costs Through Co-Op Mail</h4>
                                     <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={SharedFlyer2} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>One Size Does Not Fit All</h4>
                                     <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                  </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={SharedFlyer3} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Increase Response Through Multichannel Campaigns</h4>
                                     <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                  </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -331,38 +370,44 @@ const Index = () => {
                       </Row>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <Row className="align-items-center">
-                        <Col md="5">
+                      <Row className="align-items-center g-4">
+                        <Col lg="5">
                           <div className="offering_img">
                             <img src={SolorMail} alt="" />
                           </div>
                         </Col>
-                        <Col md="7">
+                        <Col lg="7">
                           <div className="offering_content_wrapper">
                             <h2>Stand out in the mailbox with DRMG Solo Direct Mail</h2>
                             <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
                             <div className="offering_second_wrapper">
                               <h2 className="h3 section__title">Why <span>Solo Direct Mail?</span></h2>
-                              <Row>
+                              <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail1} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Target Your Ideal Customer</h4>
                                     <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
+                                  </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail2} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Multichannel Campaign Advantage</h4>
                                     <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
+                                  </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail3} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>One Size Does Not Fit All</h4>
                                     <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
+                                  </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -372,38 +417,44 @@ const Index = () => {
                       </Row>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <Row className="align-items-center">
-                        <Col md="5">
+                      <Row className="align-items-center g-4">
+                        <Col lg="5">
                           <div className="offering_img">
                             <img src={TakeOutMenu} alt="" />
                           </div>
                         </Col>
-                        <Col md="7">
+                        <Col lg="7">
                           <div className="offering_content_wrapper">
                             <h2>Take-out Menus</h2>
                             <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
                             <div className="offering_second_wrapper">
                               <h2 className="h3 section__title">Why <span>Take-out Menus?</span></h2>
-                              <Row>
+                              <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail1} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Target Your Ideal Customer</h4>
                                     <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
+                                  </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail2} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>Multichannel Campaign Advantage</h4>
                                     <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
+                                  </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail3} alt="" />
+                                    <div className="offering_content_tezt">
                                     <h4>One Size Does Not Fit All</h4>
                                     <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
+                                  </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -415,8 +466,8 @@ const Index = () => {
                   </Swiper>
                 </div>
                 <div className="offering_bottom_wrapper mt40">
-                  <Row>
-                    <Col md="3">
+                  <Row className="g-4">
+                    <Col lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon1} alt="" />
@@ -426,7 +477,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col md="3">
+                    <Col  lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon2} alt="" />
@@ -436,7 +487,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col md="3">
+                    <Col  lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon3} alt="" />
@@ -446,7 +497,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col md="3">
+                    <Col  lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon4} alt="" />
@@ -527,143 +578,143 @@ const Index = () => {
                   </h2>
                   <h4>See why over 15,000 businesses trust DRMG.</h4>
                 </div>
-                <Row className="g-4">
-                  <Col lg="2">
+                <Row className="g-3">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo1} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo2} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo3} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo4} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo5} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo6} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo7} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo8} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo9} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo10} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo11} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo12} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo13} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo14} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo15} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo16} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo17} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo18} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo19} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo20} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo21} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo22} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo23} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo24} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo25} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo26} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo27} alt="" />
                     </div>
                   </Col>
-                  <Col lg="2">
+                  <Col lg="2" md="3" sm="4" xs="6">
                     <div className="logo_box">
                       <img src={Logo28} alt="" />
                     </div>

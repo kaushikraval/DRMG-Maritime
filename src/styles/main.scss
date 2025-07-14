@@ -369,7 +369,7 @@ ol {
   padding: 30px 0;
 
   &.scrolled {
-   padding: 20px 0;
+   padding: 20px 0 0;
    .header__logo img{
     height: 80px;
    }
@@ -421,6 +421,7 @@ ol {
 
       &.active {
         display: flex;
+        align-items: flex-start;
       }
     }
   }
@@ -434,6 +435,7 @@ ol {
     @media (max-width: 991px) {
       flex-direction: column;
       width: 100%;
+        align-items: self-start;
     }
 
     &-item {
@@ -489,8 +491,8 @@ ol {
       }
 
       @media (max-width: 991px) {
-        padding: 15px 20px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 15px 0px;
+        border-bottom: 0;
       }
 
       &::after {
@@ -932,18 +934,32 @@ footer{
     padding: 0;
     margin: 0;
     li{
-      margin: 0 0 5px;
+      margin: 0 0 10px;
       a{
-        padding: 9px 15px;
+        padding: 12px 20px;
         background: $text-light;
         border-radius: 6px;
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 18px;
         display: block;
         color: $text-dark;
+        display: flex;
+        align-items: center;
+        background: $text-light;
+        // box-shadow: 0 0 15px rgba(0,0,0,.1);
+        border: 1px solid $borderColor;
+        img{
+          width: 20px;
+          margin-right: 10px;
+          filter: grayscale(1);
+        }
         &.active{
-          background: #005bab38;
-          color: $accent-color;
+          background: $accent-color;
+          color: $text-light;
+          border-color: $accent-color;
+          img{
+            filter: brightness(0) invert(1);
+          }
         }
       }
     }

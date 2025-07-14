@@ -48,7 +48,7 @@ const Footer = () => {
     <footer>
       <section className="section contact_wrapper bg_gray" id="contact">
         <Container>
-          <Row>
+          <Row className="g-4">
             <Col md="4">
               <h2 className="section__title">
                 <span>Let's talk</span> about your flyer goals.
@@ -145,10 +145,7 @@ const Footer = () => {
                   <Link to="/">Quick Link</Link>
                 </li>
                 <li>
-                  <Link to="/">Services</Link>
-                </li>
-                <li>
-                  <Link to="/">Contact Info</Link>
+                  <Link to="/#offering">Offering</Link>
                 </li>
               </ul>
             </div>

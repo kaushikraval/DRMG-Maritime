@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -30,18 +30,48 @@ import soloMail3 from "../images/soloMail3.svg";
 import GoogleIcon from "../images/google.svg";
 import Star from "../images/star.svg";
 import GraphImg from "../images/graph-img.svg";
+import RestaurantIcon from "../images/restaurant.svg";
+import HomeGardenIcon from "../images/home-garden.svg";
+import DentalIcon from "../images/dental.svg";
+import PoliticalIcon from "../images/political.svg";
+import OpticalIcon from "../images/optical.svg";
+import RealEstateIcon from "../images/real-estate.svg";
+import HealthIcon from "../images/health.svg";
+import SmartMail from "../images/smartmail-marketing-partner.webp";
 import { useEffect, useState } from "react";
-import 'swiper/css';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
 const Industry = () => {
   const location = useLocation();
   const { pathname } = location;
-
   const [activeSection, setActiveSection] = useState("");
+  const [scrollTarget, setScrollTarget] = useState(null);
 
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      setScrollTarget(location.state.scrollTo);
+    }
+  }, [location.state]);
+
+  useLayoutEffect(() => {
+    if (scrollTarget) {
+      const el = document.getElementById(scrollTarget);
+      if (el) {
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 80;
+        const top = el.offsetTop - headerHeight;
+
+        setTimeout(() => {
+          window.scrollTo({ top, behavior: "smooth" });
+        }, 100); // delay ensures DOM is ready
+      }
+    }
+  }, [scrollTarget]);
+
+  // ScrollSpy for updating active class
   useEffect(() => {
     const sections = document.querySelectorAll(".industry_inner_wrapper");
 
@@ -53,15 +83,24 @@ const Industry = () => {
           }
         });
       },
-      {
-        threshold: 0.4, // section should be 60% visible
-      }
+      { threshold: 0.4 }
     );
 
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
   }, []);
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const headerHeight = document.querySelector("header")?.offsetHeight || 80;
+      const top = el.offsetTop - headerHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -73,7 +112,7 @@ const Industry = () => {
               <Container>
                 <Row className="align-items-center">
                   <Col lg="6">
-                    <div className="banner_text pr50 pr0-xl pt100">
+                    <div className="banner_text pr50 pr0-xl pt100 pt150-md">
                       <h1 className="mb50 mb30-xl">Industry We Serve</h1>
                       <p>
                         Explore our industry-specific case studies showcasing
@@ -97,97 +136,140 @@ const Industry = () => {
               </Container>
             </section>
 
+            <section className="section smart_mail_wrapper pb0">
+              <Container>
+                <div className="smart_mail_wrapper_inner text-center">
+                  <img className="mb20" src={SmartMail} alt="" />
+                   <div className="offering_title m0">
+                  <h2 className="section__title text-center">
+                    A <span>Marketing Solution</span> You Can Rely On
+                  </h2>
+                  <h4>Guaranteed Distribution to Mailbox</h4>
+                </div>
+                </div>
+              </Container>
+            </section>
+
             <section className="section industry_main_wrapper">
               <Container>
                 <Row>
-                  <Col lg="2">
+                  <Col xxl="2" xl="3" className="d-none d-xl-block">
                     <div className="navigation_industry">
                       <ul>
                         <li>
                           <Link
-                            to="#restaurants"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("restaurants");
+                            }}
                             className={
                               activeSection === "restaurants" ? "active" : ""
                             }
                           >
-                            Restaurants
+                            <img src={RestaurantIcon} alt="" /> Restaurants
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#HomeGarden"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("HomeGarden");
+                            }}
                             className={
                               activeSection === "HomeGarden" ? "active" : ""
                             }
                           >
-                            Home & Garden
+                            <img src={HomeGardenIcon} alt="" /> Home & Garden
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#DentalClinic"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("DentalClinic");
+                            }}
                             className={
                               activeSection === "DentalClinic" ? "active" : ""
                             }
                           >
-                            Dental Clinics
+                            <img src={DentalIcon} alt="" /> Dental Clinics
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#PoliticalCampaigns"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("PoliticalCampaigns");
+                            }}
                             className={
                               activeSection === "PoliticalCampaigns"
                                 ? "active"
                                 : ""
                             }
                           >
-                            Political Campaigns
+                            <img src={PoliticalIcon} alt="" /> Political
+                            Campaigns
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#OpticalClinics"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("OpticalClinics");
+                            }}
                             className={
                               activeSection === "OpticalClinics" ? "active" : ""
                             }
                           >
-                            Optical Clinics
+                            <img src={OpticalIcon} alt="" /> Optical Clinics
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#RealEstate"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("RealEstate");
+                            }}
                             className={
                               activeSection === "RealEstate" ? "active" : ""
                             }
                           >
-                            Real Estate
+                            <img src={RealEstateIcon} alt="" /> Real Estate
                           </Link>
                         </li>
                         <li>
                           <Link
-                            to="#HealthWellness"
+                            to="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToSection("HealthWellness");
+                            }}
                             className={
                               activeSection === "HealthWellness" ? "active" : ""
                             }
                           >
-                            Health & Wellness
+                            <img src={HealthIcon} alt="" /> Health & Wellness
                           </Link>
                         </li>
                       </ul>
                     </div>
                   </Col>
-                  <Col lg="10">
+                  <Col xxl="10" xl="9" lg="12">
                     <div className="industry_inner_wrapper" id="restaurants">
                       <h2 className=" mb20">Restaurant</h2>
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={Restaurant} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   <span>Restaurant</span> Marketing Made Easy
@@ -218,8 +300,8 @@ const Industry = () => {
                               1000%+ ROI!
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={TargetedReach} alt="" />
                                 <h4>Targeted Reach</h4>
@@ -232,7 +314,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col  xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={TangibleImpact} alt="" />
                                 <h4>Tangible Impact</h4>
@@ -244,7 +326,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col  xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={LowerCost} alt="" />
                                 <h4>Lower Cost</h4>
@@ -256,7 +338,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col  xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={MeasurableResults} alt="" />
                                 <h4>Measurable Results</h4>
@@ -277,10 +359,10 @@ const Industry = () => {
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={HomeGarden} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col  lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   Direct Mail Marketing for Your{" "}
@@ -307,8 +389,8 @@ const Industry = () => {
                               businesses:
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={TargetedReach} alt="" />
                                 <h4>Targeted Reach</h4>
@@ -321,7 +403,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={TangibleImpact} alt="" />
                                 <h4>Tangible Impact</h4>
@@ -333,7 +415,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={LowerCost} alt="" />
                                 <h4>Lower Cost</h4>
@@ -346,7 +428,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={MeasurableResults} alt="" />
                                 <h4>Measurable Results</h4>
@@ -368,10 +450,10 @@ const Industry = () => {
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={Dental} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   Boost Patient Bookings with Proven Direct Mail
@@ -408,8 +490,8 @@ const Industry = () => {
                               market.
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Disruption} alt="" />
                                 <h4>Disruption</h4>
@@ -424,7 +506,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Competition} alt="" />
                                 <h4>Increased competition</h4>
@@ -438,7 +520,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={HandShake} alt="" />
                                 <h4>Appealing to Demographics</h4>
@@ -451,7 +533,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Marketing} alt="" />
                                 <h4>Multiple marketing channels</h4>
@@ -472,7 +554,7 @@ const Industry = () => {
                             Our Most Popular{" "}
                             <span>Dental Practice Solution</span>
                           </h2>
-                          <Row>
+                          <Row className="g-3">
                             <Col md="4">
                               <div className="offering_box">
                                 <img src={soloMail1} alt="" />
@@ -518,10 +600,10 @@ const Industry = () => {
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col  lg="3" md="4">
                               <img src={Political} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   Direct Mail Marketing for{" "}
@@ -551,8 +633,8 @@ const Industry = () => {
                               provincially and Canada-wide.
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Marketing} alt="" />
                                 <h4>Build Awareness</h4>
@@ -567,7 +649,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Trust} alt="" />
                                 <h4>Strengthen Trust</h4>
@@ -581,7 +663,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Grow} alt="" />
                                 <h4>Grow Voter Base</h4>
@@ -596,7 +678,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Relevant} alt="" />
                                 <h4>Stay Relevant</h4>
@@ -619,7 +701,7 @@ const Industry = () => {
                             Our Most Popular{" "}
                             <span>Political Campaign Solution</span>
                           </h2>
-                          <Row>
+                          <Row className="g-3">
                             <Col md="4">
                               <div className="offering_box">
                                 <img src={soloMail1} alt="" />
@@ -662,10 +744,10 @@ const Industry = () => {
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={OpticalClinics} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   Direct Mail Marketing for{" "}
@@ -697,8 +779,8 @@ const Industry = () => {
                               – and it all starts with better understanding it.
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Disruption} alt="" />
                                 <h4>Disruption</h4>
@@ -712,7 +794,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Competition} alt="" />
                                 <h4>Increased competition</h4>
@@ -726,7 +808,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={HandShake} alt="" />
                                 <h4>Appealing to Demographics</h4>
@@ -740,7 +822,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Marketing} alt="" />
                                 <h4>Multiple marketing channels</h4>
@@ -760,7 +842,7 @@ const Industry = () => {
                             Our Most Popular{" "}
                             <span>Optical Practice Solution</span>
                           </h2>
-                          <Row>
+                          <Row className="g-3">
                             <Col md="4">
                               <div className="offering_box">
                                 <img src={soloMail1} alt="" />
@@ -803,10 +885,10 @@ const Industry = () => {
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={RealEstate} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   High-Impact Direct Mail Marketing for{" "}
@@ -844,8 +926,8 @@ const Industry = () => {
                               engagement:
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Marketing} alt="" />
                                 <h4>Build Awareness</h4>
@@ -859,7 +941,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Trust} alt="" />
                                 <h4>Strengthen Trust</h4>
@@ -872,7 +954,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Grow} alt="" />
                                 <h4>Get New Client</h4>
@@ -886,7 +968,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Relevant} alt="" />
                                 <h4>Drive Repeat Business</h4>
@@ -906,7 +988,7 @@ const Industry = () => {
                             Our Most Popular <span>Real Estate</span> Cateogry
                             Marketing Product
                           </h2>
-                          <Row>
+                          <Row className="g-3">
                             <Col md="4">
                               <div className="offering_box">
                                 <img src={soloMail1} alt="" />
@@ -944,15 +1026,18 @@ const Industry = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="industry_inner_wrapper p0 m0" id="HealthWellness">
+                    <div
+                      className="industry_inner_wrapper p0 m0"
+                      id="HealthWellness"
+                    >
                       <h2 className="mb20">Health & Wellness</h2>
                       <div className="industry_in_box">
                         <div className="industry_first_wrap">
                           <Row className="g-4 align-items-center">
-                            <Col md="3">
+                            <Col lg="3" md="4">
                               <img src={HealthWellness} alt="" />
                             </Col>
-                            <Col md="9">
+                            <Col lg="9" md="8">
                               <div className="industry_text">
                                 <h3>
                                   Direct Mail Marketing for{" "}
@@ -985,8 +1070,8 @@ const Industry = () => {
                               – and it all starts with better understanding it.
                             </p>
                           </div>
-                          <Row>
-                            <Col md="3">
+                          <Row className="g-3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Disruption} alt="" />
                                 <h4>Disruption</h4>
@@ -999,7 +1084,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Competition} alt="" />
                                 <h4>Increased competition</h4>
@@ -1013,7 +1098,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={HandShake} alt="" />
                                 <h4>Appealing to Demographics</h4>
@@ -1028,7 +1113,7 @@ const Industry = () => {
                                 </p>
                               </div>
                             </Col>
-                            <Col md="3">
+                            <Col xxl="3" sm="6">
                               <div className="feature_box">
                                 <img src={Marketing} alt="" />
                                 <h4>Multiple marketing channels</h4>
@@ -1049,7 +1134,7 @@ const Industry = () => {
                             Our Most Popular{" "}
                             <span>Health & Wellness Solution</span>
                           </h2>
-                          <Row>
+                          <Row className="g-3">
                             <Col md="4">
                               <div className="offering_box">
                                 <img src={soloMail1} alt="" />
@@ -1108,6 +1193,20 @@ const Industry = () => {
                       disableOnInteraction: false,
                     }}
                     modules={[Navigation, Autoplay]}
+                     breakpoints={{
+                      0: {
+                        slidesPerView: 1,
+                      },
+                      640: {
+                        slidesPerView: 2,
+                      },
+                      991: {
+                        slidesPerView: 3,
+                      },
+                      1401: {
+                        slidesPerView: 4,
+                      },
+                    }}
                     className="reviewSlider"
                   >
                     <SwiperSlide>
@@ -1126,7 +1225,12 @@ const Industry = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -1152,7 +1256,12 @@ const Industry = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -1178,7 +1287,12 @@ const Industry = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -1204,7 +1318,12 @@ const Industry = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -1230,7 +1349,12 @@ const Industry = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -1253,12 +1377,17 @@ const Industry = () => {
                   </div>
                   <div className="good_news_contentn">
                     <h6>THE GOOD NEWS</h6>
-                    <p>Yes, you’re facing challenges and challenging times. But keep reading! We’ll show you how direct mail can be used, targeted and integrated with other marketing channels to help you better connect with prospects and clients that are vital to you and your bottom line.</p>
+                    <p>
+                      Yes, you’re facing challenges and challenging times. But
+                      keep reading! We’ll show you how direct mail can be used,
+                      targeted and integrated with other marketing channels to
+                      help you better connect with prospects and clients that
+                      are vital to you and your bottom line.
+                    </p>
                   </div>
                 </div>
               </Container>
             </section>
-
           </main>
         </div>
       </div>
