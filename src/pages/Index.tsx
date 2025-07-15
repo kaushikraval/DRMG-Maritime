@@ -52,6 +52,7 @@ import Logo25 from "../images/logo25.webp";
 import Logo26 from "../images/logo26.webp";
 import Logo27 from "../images/logo27.webp";
 import Logo28 from "../images/logo28.webp";
+import SmartMail from "../images/smartmail-marketing-partner.webp";
 
 
 import gsap from "gsap";
@@ -135,6 +136,20 @@ const Index = () => {
                 </Row>
               </Container>
             </section>
+
+             <section className="section smart_mail_wrapper pb0">
+                          <Container>
+                            <div className="smart_mail_wrapper_inner text-center">
+                              <img className="mb20" src={SmartMail} alt="" />
+                               <div className="offering_title m0">
+                              <h2 className="section__title text-center">
+                                A <span>Marketing Solution</span> You Can Rely On
+                              </h2>
+                              <h4>Guaranteed Distribution to Mailbox</h4>
+                            </div>
+                            </div>
+                          </Container>
+                        </section>
 
             <section className="section review_wrapper">
               <Container>

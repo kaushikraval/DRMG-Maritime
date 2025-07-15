@@ -131,9 +131,6 @@ const scrollToSection = (id) => {
                   <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('HealthWellness');setIsOpen(false); }}>Health & Wellness</Link></li>
                 </ul>
               </li>
-              <li className="header__menu-item">
-                <Link to="#contact" className='header__menu-link' onClick={(e) => smoothScroll(e, '#contact')}>Contact</Link>
-              </li>
             </ul>
             <Link to="#contact" className="btn btn__dark" onClick={(e) => smoothScroll(e, '#contact')}>Free Consult <span><img src={BtnArrow} alt="" /></span></Link>
           </nav>
