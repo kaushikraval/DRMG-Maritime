@@ -53,34 +53,34 @@ import Logo26 from "../images/logo26.webp";
 import Logo27 from "../images/logo27.webp";
 import Logo28 from "../images/logo28.webp";
 import SmartMail from "../images/smartmail-marketing-partner.webp";
-
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useGSAP } from "@gsap/react";
 import { Link, useLocation } from "react-router-dom";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import 'swiper/css/pagination';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, useGSAP);
 
 const Index = () => {
+  const location = useLocation();
 
-   const location = useLocation();
-
-   useEffect(() => {
+  useEffect(() => {
     if (location.state?.scrollTo) {
       const id = location.state.scrollTo;
       const el = document.getElementById(id);
       if (el) {
-        const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 80;
         const top = el.offsetTop - headerHeight;
 
         setTimeout(() => {
-          window.scrollTo({ top, behavior: 'smooth' });
+          window.scrollTo({ top, behavior: "smooth" });
         }, 100); // wait for layout
       }
     }
@@ -92,8 +92,6 @@ const Index = () => {
       effects: true,
     });
   }, [location]);
-
-  
 
   return (
     <>
@@ -137,19 +135,19 @@ const Index = () => {
               </Container>
             </section>
 
-             <section className="section smart_mail_wrapper pb0">
-                          <Container>
-                            <div className="smart_mail_wrapper_inner text-center">
-                              <img className="mb20" src={SmartMail} alt="" />
-                               <div className="offering_title m0">
-                              <h2 className="section__title text-center">
-                                A <span>Marketing Solution</span> You Can Rely On
-                              </h2>
-                              <h4>Guaranteed Distribution to Mailbox</h4>
-                            </div>
-                            </div>
-                          </Container>
-                        </section>
+            <section className="section smart_mail_wrapper pb0">
+              <Container>
+                <div className="smart_mail_wrapper_inner text-center">
+                  <img className="mb20" src={SmartMail} alt="" />
+                  <div className="offering_title m0">
+                    <h2 className="section__title text-center">
+                      A <span>Marketing Solution</span> You Can Rely On
+                    </h2>
+                    <h4>Guaranteed Distribution to Mailbox</h4>
+                  </div>
+                </div>
+              </Container>
+            </section>
 
             <section className="section review_wrapper">
               <Container>
@@ -166,7 +164,6 @@ const Index = () => {
                       delay: 2500,
                       disableOnInteraction: false,
                     }}
-
                     breakpoints={{
                       0: {
                         slidesPerView: 1,
@@ -200,7 +197,12 @@ const Index = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -226,7 +228,12 @@ const Index = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -252,7 +259,12 @@ const Index = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -278,7 +290,12 @@ const Index = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -304,7 +321,12 @@ const Index = () => {
                             <img src={GoogleIcon} alt="" />
                           </div>
                         </div>
-                        <p>Professionals that get your request done fast, effectively with great suggestions! Been using their service to distribute flyers all over Canada, recommended 👍</p>
+                        <p>
+                          Professionals that get your request done fast,
+                          effectively with great suggestions! Been using their
+                          service to distribute flyers all over Canada,
+                          recommended 👍
+                        </p>
                         <div className="rating-star">
                           <img src={Star} alt="" />
                           <img src={Star} alt="" />
@@ -326,14 +348,22 @@ const Index = () => {
                     Our <span>Offerings</span>
                   </h2>
                   <h4>Cost Effective Print and Distribution</h4>
-                  <p>Other inclusive services: Design, Tracking Options, PT Report, Boxing, Bundling, Shipping and much more.</p>
+                  <p>
+                    Other inclusive services: Design, Tracking Options, PT
+                    Report, Boxing, Bundling, Shipping and much more.
+                  </p>
                 </div>
                 <div className="offering_slider_wrapper">
-                   <Swiper
+                  <Swiper
                     slidesPerView={1}
                     spaceBetween={20}
-                    navigation={true}
-                    modules={[Navigation]}
+                    navigation={false}
+                    pagination={{ clickable: true }}
+                    autoplay={{
+                      delay: 7000,
+                      disableOnInteraction: false,
+                    }}
+                    modules={[Autoplay, Pagination]}
                     className="offering_slider"
                     autoHeight={true}
                   >
@@ -347,16 +377,26 @@ const Index = () => {
                         <Col lg="7">
                           <div className="offering_content_wrapper">
                             <h2>Shared Flyer Mail</h2>
-                            <p>Canada’s most trusted and recognized shared direct mail envelope for monthly coupon advertising, menus, catalogues and more!</p>
+                            <p>
+                              Canada’s most trusted and recognized shared direct
+                              mail envelope for monthly coupon advertising,
+                              menus, catalogues and more!
+                            </p>
                             <div className="offering_second_wrapper">
-                              <h2 className="h3 section__title">Why <span>Shared Flyer Mail?</span></h2>
+                              <h2 className="h3 section__title">
+                                Why <span>Shared Flyer Mail?</span>
+                              </h2>
                               <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={SharedFlyer1} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Share Costs Through Co-Op Mail</h4>
-                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
+                                      <h4>Share Costs Through Co-Op Mail</h4>
+                                      <p>
+                                        Expand your reach and target customers
+                                        locally or nationally at a fraction of
+                                        the cost of other mediums.
+                                      </p>
                                     </div>
                                   </div>
                                 </Col>
@@ -364,18 +404,29 @@ const Index = () => {
                                   <div className="offering_box">
                                     <img src={SharedFlyer2} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>One Size Does Not Fit All</h4>
-                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
-                                  </div>
+                                      <h4>One Size Does Not Fit All</h4>
+                                      <p>
+                                        Expand your reach and target customers
+                                        locally or nationally at a fraction of
+                                        the cost of other mediums.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={SharedFlyer3} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Increase Response Through Multichannel Campaigns</h4>
-                                    <p>Expand your reach and target customers locally or nationally at a fraction of the cost of other mediums.</p>
-                                  </div>
+                                      <h4>
+                                        Increase Response Through Multichannel
+                                        Campaigns
+                                      </h4>
+                                      <p>
+                                        Expand your reach and target customers
+                                        locally or nationally at a fraction of
+                                        the cost of other mediums.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -393,36 +444,59 @@ const Index = () => {
                         </Col>
                         <Col lg="7">
                           <div className="offering_content_wrapper">
-                            <h2>Stand out in the mailbox with DRMG Solo Direct Mail</h2>
-                            <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
+                            <h2>
+                              Stand out in the mailbox with DRMG Solo Direct
+                              Mail
+                            </h2>
+                            <p>
+                              Make the greatest impact with a standalone
+                              advertisement & brand exclusivity.
+                            </p>
                             <div className="offering_second_wrapper">
-                              <h2 className="h3 section__title">Why <span>Solo Direct Mail?</span></h2>
+                              <h2 className="h3 section__title">
+                                Why <span>Solo Direct Mail?</span>
+                              </h2>
                               <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail1} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Target Your Ideal Customer</h4>
-                                    <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
-                                  </div>
+                                      <h4>Target Your Ideal Customer</h4>
+                                      <p>
+                                        Leverage Canada Post, Pelmorex,
+                                        Environics, or first-party data to
+                                        target by building type, household
+                                        income, family type, and much more.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail2} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Multichannel Campaign Advantage</h4>
-                                    <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
-                                  </div>
+                                      <h4>Multichannel Campaign Advantage</h4>
+                                      <p>
+                                        Engage customers with the same message
+                                        online and at home, in their mailbox.
+                                        Consumers pay 39% more attention to
+                                        integrated campaigns.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail3} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>One Size Does Not Fit All</h4>
-                                    <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
-                                  </div>
+                                      <h4>One Size Does Not Fit All</h4>
+                                      <p>
+                                        We have postcard options and sizes for
+                                        every industry, whether you are a
+                                        restaurant with a menu or a landscaping
+                                        company with a brochure.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -441,35 +515,55 @@ const Index = () => {
                         <Col lg="7">
                           <div className="offering_content_wrapper">
                             <h2>Take-out Menus</h2>
-                            <p>Make the greatest impact with a standalone advertisement & brand exclusivity.</p>
+                            <p>
+                              Make the greatest impact with a standalone
+                              advertisement & brand exclusivity.
+                            </p>
                             <div className="offering_second_wrapper">
-                              <h2 className="h3 section__title">Why <span>Take-out Menus?</span></h2>
+                              <h2 className="h3 section__title">
+                                Why <span>Take-out Menus?</span>
+                              </h2>
                               <Row className="g-3">
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail1} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Target Your Ideal Customer</h4>
-                                    <p>Leverage Canada Post, Pelmorex, Environics, or first-party data to target by building type, household income, family type, and much more.</p>
-                                  </div>
+                                      <h4>Target Your Ideal Customer</h4>
+                                      <p>
+                                        Leverage Canada Post, Pelmorex,
+                                        Environics, or first-party data to
+                                        target by building type, household
+                                        income, family type, and much more.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail2} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>Multichannel Campaign Advantage</h4>
-                                    <p>Engage customers with the same message online and at home, in their mailbox. Consumers pay 39% more attention to integrated campaigns.</p>
-                                  </div>
+                                      <h4>Multichannel Campaign Advantage</h4>
+                                      <p>
+                                        Engage customers with the same message
+                                        online and at home, in their mailbox.
+                                        Consumers pay 39% more attention to
+                                        integrated campaigns.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                                 <Col md="4">
                                   <div className="offering_box">
                                     <img src={soloMail3} alt="" />
                                     <div className="offering_content_tezt">
-                                    <h4>One Size Does Not Fit All</h4>
-                                    <p>We have postcard options and sizes for every industry, whether you are a restaurant with a menu or a landscaping company with a brochure.</p>
-                                  </div>
+                                      <h4>One Size Does Not Fit All</h4>
+                                      <p>
+                                        We have postcard options and sizes for
+                                        every industry, whether you are a
+                                        restaurant with a menu or a landscaping
+                                        company with a brochure.
+                                      </p>
+                                    </div>
                                   </div>
                                 </Col>
                               </Row>
@@ -492,7 +586,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col  lg="3" sm="6">
+                    <Col lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon2} alt="" />
@@ -502,7 +596,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col  lg="3" sm="6">
+                    <Col lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon3} alt="" />
@@ -512,7 +606,7 @@ const Index = () => {
                         </div>
                       </div>
                     </Col>
-                    <Col  lg="3" sm="6">
+                    <Col lg="3" sm="6">
                       <div className="work_box_wrapper">
                         <div className="icon">
                           <img src={Icon4} alt="" />
@@ -589,7 +683,8 @@ const Index = () => {
               <Container>
                 <div className="offering_title">
                   <h2 className="section__title text-center">
-                    When it comes to <span>Direct Mail</span>, there's no comparison. 
+                    When it comes to <span>Direct Mail</span>, there's no
+                    comparison.
                   </h2>
                   <h4>See why over 15,000 businesses trust DRMG.</h4>
                 </div>
@@ -752,8 +847,6 @@ const Index = () => {
                 </Row>
               </Container>
             </section>
-
-            
           </main>
           <Footer />
         </div>

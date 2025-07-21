@@ -108,7 +108,7 @@ const Industry = () => {
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <main>
-            <section className="banner_wrapper inner_banner">
+            {/* <section className="banner_wrapper inner_banner">
               <Container>
                 <Row className="align-items-center">
                   <Col lg="6">
@@ -148,9 +148,9 @@ const Industry = () => {
                 </div>
                 </div>
               </Container>
-            </section>
+            </section> */}
 
-            <section className="section industry_main_wrapper">
+            <section className="section industry_main_wrapper pt150">
               <Container>
                 <Row>
                   <Col xxl="2" xl="3" className="d-none d-xl-block">

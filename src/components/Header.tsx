@@ -120,7 +120,7 @@ const scrollToSection = (id) => {
                 <Link to="/#offering" className='header__menu-link' onClick={(e) => smoothScroll(e, '/#offering')}>Offering</Link>
               </li>
               <li className="header__menu-item has_children">
-                <Link to="#" className={dropdownClick  ? 'header__menu-link active' : 'header__menu-link'} onClick={() => handleClick()}>Industry <img src={DownArrow} className='ml5' alt="" /></Link>
+                <Link to="/industry" className={dropdownClick  ? 'header__menu-link active' : 'header__menu-link'} onClick={() => handleClick()}>Industry <img src={DownArrow} className='ml5' alt="" /></Link>
                 <ul className={dropdownClick  ? 'sub_menu show' : 'sub_menu'}>
                   <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('restaurants');setIsOpen(false); }}>Restaurants</Link></li>
                   <li><Link to="#" onClick={(e) => { e.preventDefault(); handleSubMenuClick('HomeGarden');setIsOpen(false); }}>Home & Garden</Link></li>

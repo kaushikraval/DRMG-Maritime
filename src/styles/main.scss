@@ -366,13 +366,25 @@ ol {
   width: 100%;
   z-index: 100;
   transition: all 0.3s ease;
-  padding: 30px 0;
+  padding: 30px 0 0;
+
+         &:before{
+        content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+   z-index: -1;
+    backdrop-filter: blur(10px);
+  }
 
   &.scrolled {
    padding: 20px 0 0;
    .header__logo img{
     height: 80px;
    }
+
   }
 
   &__container {
@@ -385,9 +397,11 @@ ol {
     justify-content: flex-start;
     align-items: center;
     background: $text-light;
-    border: 1px solid #424242;
+    // border: 1px solid #424242;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
     border-radius: 12px;
     padding-right: 12px;
+
   }
 
   &__logo {
@@ -1040,6 +1054,16 @@ footer{
     p{
       font-size: 20px;
       line-height: 32px;
+    }
+  }
+}
+
+.swiper-pagination{
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    &.swiper-pagination-bullet-active{
+      background: $accent-color;
     }
   }
 }
